@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  java_app_new:
+    container_name: java_app_new
+    image: pee-java-app:1.0.0
+    build: .
+    ports:
+      - 8095:8095
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://java_db_new:3306/aviacion_Civil
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+    depends_on:
+      - java_db_new
+
+  java_db_new:
+    container_name: java_db_new
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: aviacion_Civil

@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  java_app_mongo:
+    container_name: java_app_mongo
+    image: pee-java-app-mongo:1.0.0
+    build: .
+    ports:
+      - 8090:8090
+    depends_on:
+      - mongo_db
+
+  mongo_db:
+    image: mongo:latest
+    ports:
+      - 27017:27017
